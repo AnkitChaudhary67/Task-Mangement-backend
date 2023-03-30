@@ -3,6 +3,7 @@ const User = require('../model/User');
 const Category = require('../model/Category')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { query } = require('express');
 
 
 
@@ -198,6 +199,7 @@ exports.getCategoryDetail = async (req, res) => {
 
 // create Task
 exports.createTask = async (req, res) => {
+    
     const { title, description, categoryId, dueDate, priority, assignedUserId, status } = req.body;
 
     if (!title || !description || !categoryId || !dueDate || !priority || !assignedUserId || !status) {
@@ -224,12 +226,12 @@ exports.editTask = async (req, res) => {
     try {
         const updateuser = await Task.findByIdAndUpdate({ _id:taskId }, {
             title, description, categoryId, dueDate, priority, assignedUserId, status
-        }, {
-            new: true
         });
 
-        await updateuser.save();
-        res.status(201).json({ message: 'Task Update successfully' });
+        res.status(200).json({
+            message: "taskId update succesfully!",
+            data: updateuser
+        });
 
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -260,7 +262,8 @@ exports.deleteTask = async (req, res) => {
 // get Task
 exports.getTask = async (req, res) => {
     try {
-        const usersData = await Task.aggregate([
+        const usersData = await Task. 
+        aggregate([
             {
                 $lookup: {
                     from: Category.collection.name,
@@ -397,7 +400,7 @@ exports.getUsers = async (req, res) => {
 
 // update user status
 
-exports.userstatus = async (req, res) => {
+exports.taskstatus = async (req, res) => {
     const { id } = req.params;
     const { data } = req.body;
 

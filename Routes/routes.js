@@ -23,15 +23,15 @@ router.get("/getCategory",validateToken,controllers.getCategory);
 router.post("/getCategoryDetail",validateToken,controllers.getCategoryDetail);
 
 // Task module
-router.post("/addTask",controllers.createTask);
-router.get("/getTask",controllers.getTask);
-router.put("/editTask",controllers.editTask);
-router.delete("/deleteTask",controllers.deleteTask);
+router.post("/addTask",validateToken,controllers.createTask);
+router.get("/getTask",validateToken,controllers.getTask);
+router.put("/editTask",validateToken,controllers.editTask);
+router.delete("/deleteTask",validateToken,controllers.deleteTask);
 router.post("/getTaskDetail",validateToken,controllers.getTaskDetail);
 
 
 
-router.put("/user/status/:id",controllers.userstatus);
+router.put("/status/:id",controllers.taskstatus);
 
 
 

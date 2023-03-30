@@ -5,4 +5,5 @@ node_modules
 
 .env
 
-package-lock.json
+git check-ignore -v -n package-lock.json
+::      package-lock.json
